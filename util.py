@@ -361,7 +361,7 @@ def create_cvx_layer(lp, nneg):
         _, m_eq, _ = A_eq.shape
         cvx_A_eq = cp.Parameter((m_eq, n))
         cvx_b_eq = cp.Parameter((m_eq))
-        cons += [cvx_A_eq@cvx_x <= cvx_b_eq]
+        cons += [cvx_A_eq@cvx_x == cvx_b_eq]
         prob = cp.Problem(obj, cons)
         layer = CvxpyLayer(prob, [cvx_c, cvx_A_ub, cvx_b_ub, cvx_A_eq, cvx_b_eq], [cvx_x])
     else:
